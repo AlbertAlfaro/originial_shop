@@ -9,6 +9,8 @@
 #factura input[type=text]{width: 60px;}
 #factura a{text-decoration: none;}
 #total{margin-left: 75%; }
+body{background-color: #eee;}
+form{margin-left: -2px;}
 
 
 
