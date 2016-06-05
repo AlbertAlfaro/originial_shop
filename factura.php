@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta charset="UTF-8" >
+  <title>ORIGINAL SHOP | FACTURA </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -92,9 +94,11 @@
 
     </div>
   </form>
-
   </section>
 </body>
+<br>
+<br>
+.
   <footer>
       <div id="footer">
         <div class="container">
