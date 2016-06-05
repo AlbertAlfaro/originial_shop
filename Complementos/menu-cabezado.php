@@ -16,7 +16,7 @@ $mayus=strtoupper($reco);
   				<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
   			</button>
   			<button type="button" class="btn btn-success btn-circle" title="Perfil" data-container="body" data-toggle="popover" data-placement="bottom" 
-			data-content="<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Folders-OS-User-No-Frame-Metro-icon.png' alt='' class='img-thumbnail'><br><button type='button' class='btn btn-success'>Cerrar sesion</button> ">
+			data-content="<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Folders-OS-User-No-Frame-Metro-icon.png' alt='' class='img-thumbnail'><br><a href='cerrarSession.php' type='button' class='btn btn-success'>Cerrar sesion</a> ">
   				<label><?php echo $mayus?></label>
   			</button>
   			<a href="">&nbsp;&nbsp;<?php if(isset($_SESSION['nombre_usuario'])){echo $_SESSION['nombre_usuario'];} ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
