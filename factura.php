@@ -1,3 +1,8 @@
+<?php 
+include('Complementos/conexion.php');
+$cliente=mysql_query("SELECT *FROM cliente");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,11 +51,18 @@
           <select class="selectpicker" data-style="btn-success" id="cliente" name="cliente">
                 <option value="" selected="selected">Seleccione</option>
                 <option value="General">General</option>
-                <option value="1">Cliente1</option>
-                <option value="2">Cliente2</option>
-                <option value="3">Cliente3</option>
+                <?php while($datos= mysql_fetch_array($cliente)){ ?>
+                <option value="<?php echo $datos[0];?>"><?php echo $datos[1]." ".$datos[2];?></option>
+                <?php }?>
               </select>
         </div>
+    </div>
+    <div id="nuevo-client">
+
+      <button data-toggle="modal" data-target="#mymodal1" type="button" class="btn btn-primary" aria-label="Left Align">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Cliente
+      </button>
+
     </div>
     <div id="fecha">
       <label>Fecha: </label>
@@ -99,13 +111,6 @@
 <br>
 <br>
 .
-  <footer>
-      <div id="footer">
-        <div class="container">
-          <p class="text-muted credit">Todos derechos reservados <a href="http://facebook.com/">Alberto Alfaro</a> 2016.</p>
-      </div>
-    </div>
-  </footer>
 </body>
 </html>
 
@@ -151,6 +156,52 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Imprimir</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade bs-example-modal-sm"  tabindex="-1" role="dialog" id="mymodal1" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-sm">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Nuevo cliente</h4>
+      </div>
+      <div class="modal-body" >
+        <div class="form-group">
+            <label for="recipient-name" class="control-label">Nombre: </label>
+            
+              <input type="text" class="form-control" id="nombre" placeholder="Nombre Cliente">
+            
+        </div>
+      
+        <div class="form-group">
+            <label for="recipient-name" class=" control-label">Apellido: </label>
+           
+              <input type="text" class="form-control" id="apellido" placeholder="Apellido Cliente">
+            
+        </div>
+       
+        <div class="form-group">
+            <label for="recipient-name" class="control-label">Dirreccion: </label>
+            
+              <input type="text" class="form-control" id="direccion" placeholder="Direccion Cliente">
+           
+        </div>
+       
+         <div class="form-group">
+            <label for="recipient-name" class="control-label">Telefono: </label>
+            
+              <input type="text" class="form-control" id="telefono" placeholder="Telefono Cliente">
+            
+        </div>
+        .
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Guardar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

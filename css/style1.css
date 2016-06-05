@@ -1,6 +1,7 @@
+#nuevo-client{float: left; margin-top: 45px; margin-left: -40px;}
 #det{margin-left: 30px; width: 80%;}
 #clien{margin-top: 20px; width: 30%; float: left;}
-#fecha{margin-top: 20px; width: 30%; margin-left:350px; float: left;}
+#fecha{margin-top: -64px; width: 30%; margin-left:350px; float: left;}
 #fecha input[type=text]{ height: 35px;}
 #buscar_producto{margin-top: 150px; width: 60%;}
 #factura{width: 90%; margin-left: 30px;}
@@ -8,6 +9,7 @@
 #factura input[type=text]{width: 60px;}
 #factura a{text-decoration: none;}
 #total{margin-left: 75%; }
+
 
 
 

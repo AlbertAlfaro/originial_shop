@@ -20,11 +20,9 @@
 			<hr>
 		</div>
 		<center>
-			<div class="jumbotron">
 				<h1>Opciones de inventario</h1>
 				<br><br>
 				<?php include "Complementos/iconos.php" ?>
-			</div>
 		</center>
 			
 	</section>	

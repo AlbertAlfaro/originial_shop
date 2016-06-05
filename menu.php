@@ -9,8 +9,8 @@
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script src="jquery-ui/jquery-ui.js"></script> 
   	<script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
-  	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  	<script type="text/javascript" src="html2canvas.js"></script>
+  
+ 
 </head>
 <body>
 	<?php include("Complementos/menu-cabezado.php");?>
@@ -49,11 +49,5 @@
 		</center>
 			
 	</section>	
-	<div class="container">
-        <p class="text-muted credit">Derecho reservados <a href="http://martinbean.co.uk/">Programadores UES</a> and <a href="http://ryanfait.com/sticky-footer/">Ing de sistemas</a>.</p>
-      </div>
-    </div>	
-
-
 </body>
 </html>

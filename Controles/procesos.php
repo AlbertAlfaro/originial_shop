@@ -1,7 +1,9 @@
 <?php 
 include("../Complementos/conexion.php");
 $op=$_POST['op'];
+
 session_start();
+
 
 class process{
 
@@ -16,9 +18,11 @@ class process{
 		    $tipo=$user_log[3];
 		    $nombre=$user_log[1];
 	    }
+	    if(isset($id_user)){
 	    $_SESSION['usuario_logiado']=$id_user;
 	    $_SESSION['tipo_usuario']=$tipo;
 	    $_SESSION['nombre_usuario']=$nombre;
+		}
 		if($n_sql>0){
 
 			return true;

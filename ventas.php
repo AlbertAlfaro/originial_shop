@@ -20,16 +20,11 @@
 			<hr>
 		</div>
 		<center>
-			<div class="jumbotron">
-				<h1>Opciones de venta</h1>
+				<h2>Opciones de venta</h2>
 				<br><br>
 				<?php include "Complementos/iconos_venta.php" ?>
-			</div>
 		</center>
 			
 	</section>	
-		
-
-
 </body>
 </html>
