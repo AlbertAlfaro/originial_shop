@@ -9,8 +9,6 @@
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script src="jquery-ui/jquery-ui.js"></script> 
   	<script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
-  
- 
 </head>
 <body>
 	<?php include("Complementos/menu-cabezado.php");?>

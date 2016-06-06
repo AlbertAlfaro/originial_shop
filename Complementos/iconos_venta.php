@@ -21,7 +21,7 @@
 						</div>
 					</li>
 				</a>
-				<a href="factura.php">
+				<a href="ventas_realizadas.php">
 					<li>
 						<div class="ch-item fac-img-2">
 							<div class="ch-info">

@@ -1,11 +1,10 @@
 <?php 
 
 session_start();
-
-$nom=$_SESSION['nombre_usuario'];
-$reco=$nom[0];
-$mayus=strtoupper($reco);
-
+	$nom=$_SESSION['nombre_usuario'];
+	$reco=$nom[0];
+	$mayus=strtoupper($reco);
+	
 ?>
 	<header>
 		<label id="titulo"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> OriginalShop</label><br>

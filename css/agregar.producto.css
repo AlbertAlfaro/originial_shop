@@ -1,0 +1,12 @@
+#datos-producto .row{
+	background: white;
+}
+
+#datos-producto .row .input-field{
+	border: 1px solid #f9f9f9;
+	margin: 3px;
+}
+
+#datos-producto .row *{
+	background: white;
+}
