@@ -8,7 +8,6 @@
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap-theme.min.css" type="text/css"></link>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    
 </head>
 <body>
@@ -20,7 +19,6 @@
 			<hr>
 		</div>
 		<center>
-			<div class="jumbotron">
 				<h1>Opciones de ADMINISTRACION</h1>
 				<br><br>
 				<?php include "Complementos/iconosAdministracion.php" ?>

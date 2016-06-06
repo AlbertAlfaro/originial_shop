@@ -1,4 +1,5 @@
-body{background-color: #333;}
+html{background-color: #eee;}
+
 header{width: 100%;height: 60px; font-family: "Roboto",sans-serif; background-color: #272829;}
 header{background-color: #272829;}
 header b{color:#fff; margin-left: 30px; font-size: 18px; margin-top: 2px;}

@@ -27,9 +27,11 @@ session_start();
 	</nav>
 	<aside>
 		<br><br>
-		<img src="http://www.talcualdigital.com/Content/images/v3/Instagram.png" class="img-responsive img-circle" alt="Responsive image">
 		<br>
-		<label>ORIGINAL SHOW MENU</label>
+		<img src="img/OriginalShop.png" class="img-circle" alt="Logo">
+		<br>
+		<BR>
+		<label>ORIGINAL SHOP MENU</label>
 
 
 		<br><br>

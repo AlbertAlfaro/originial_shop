@@ -42,11 +42,6 @@
 	</section>
 
 </div>
-<div id="footer">
-      <div class="container">
-        <p class="text-muted credit">Derecho reservados <a href="http://martinbean.co.uk/">Programadores UES</a> and <a href="http://ryanfait.com/sticky-footer/">Ing de sistemas</a>.</p>
-      </div>
-</div>
 </body>
 </html>
 

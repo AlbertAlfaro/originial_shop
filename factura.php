@@ -127,7 +127,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
         <div class="form-group">
             <label for="recipient-name" class="control-label">Cliente: </label>
             
-              <label for="recipient-name" class="control-label">Jose Alberto</label>
+              <label for="recipient-name" class="control-label">Juan Perez</label>
             
         </div>
       
