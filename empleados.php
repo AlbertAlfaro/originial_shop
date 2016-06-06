@@ -19,7 +19,6 @@
 			
 		</div>
 		<br><br>
-<<<<<<< HEAD
     <div class="panel panel-default" style="width: 80%; margin: auto;">
       <div class="panel-heading">Empleados </div>
       <div class="panel_body">
@@ -49,41 +48,6 @@
           </tr>
         </table>
         </div>
-    </dialogiv>
-=======
-		<div class="panel panel-default" style="width: 80%; margin: auto;">
-  		<div class="panel-heading">Empleados</div>
-  		<div class="panel-body">
-    		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar</button>
-    		<br><br>
-    		<div id="table"></div>
-    		<table class="table table-hover">
-      		<tr>
-        		<td>Id</td>
-        		<td><strong>Nombre</strong></td>
-        		<td><strong>Tipo</strong></td>
-        		<td><strong>Accion</strong></td>
-      		</tr>
-      		<?php 
-          if(isset($consul)){
-      		while($datos= mysql_fetch_array($consul)){
-      		}
-          ?>
-      		<tr>
-        		<td><?php echo $datos[0] ?></td>
-        		<td><?php echo $datos[1] ?></td>
-        		<td><?php echo $datos[3] ?></td>
-        		<td>
-          		<div class="btn-group">
-            		<button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
-            		</button>
-            		<ul class="dropdown-menu">
-              		<li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-              		<li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
-            		</ul>
-          		</div>
->>>>>>> 731bcf35497067291d56e1c8279e8e09f87e1cc7
-
 	</section>	
 </body>
 </html>

@@ -9,12 +9,6 @@
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script src="jquery-ui/jquery-ui.js"></script> 
   	<script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
-<<<<<<< HEAD
-  
- 
-=======
-  	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
->>>>>>> 731bcf35497067291d56e1c8279e8e09f87e1cc7
 </head>
 <body>
 	<?php include("Complementos/menu-cabezado.php");?>

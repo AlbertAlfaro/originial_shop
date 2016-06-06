@@ -18,11 +18,8 @@ class process{
 		    $tipo=$user_log[3];
 		    $nombre=$user_log[1];
 	    }
-<<<<<<< HEAD
 	    if(isset($id_user)){
-=======
-	      if(isset($id_user)){
->>>>>>> 731bcf35497067291d56e1c8279e8e09f87e1cc7
+
 	    $_SESSION['usuario_logiado']=$id_user;
 	    $_SESSION['tipo_usuario']=$tipo;
 	    $_SESSION['nombre_usuario']=$nombre;

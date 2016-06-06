@@ -21,7 +21,7 @@
 		<br><br>
 		<div class="panel panel-default" style="width: 80%; margin: auto;">
   		<div class="panel-heading">Administrar Productos</div>
-  		<div class="panel-body">
+  		<div class="panel_body">
     		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar Producto</button>
     		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Generar Reporte</button>
         
@@ -74,10 +74,6 @@
 		
 			
 	</section>	
-	<div class="container">
-        <p class="text-muted credit">Derecho reservados <a href="http://martinbean.co.uk/">Programadores UES</a> and <a href="http://ryanfait.com/sticky-footer/">Ing de sistemas</a>.</p>
-      </div>
-    </div>	
 
 
 </body>
