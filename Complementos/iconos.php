@@ -21,16 +21,16 @@
 					<li>
 						<div class="ch-item ch-img-2">
 							<div class="ch-info">
-								<h3>Existencias Modificación</h3>
-								<p>Original Shop <a href="http://drbl.in/eOPF">ues san miguel</a></p>
+								<h3>Gestión de productos</h3>
+								<p>Original Shop <a href="productos.php">View productos</a></p>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="ch-item ch-img-3">
 							<div class="ch-info">
-								<h3>Compras Realizadas</h3>
-								<p>by Charlie Wagers <a href="http://drbl.in/ekhp">View on Dribbble</a></p>
+								<h3>Gestión de Inventario</h3>
+								<p>by Charlie Wagers <a href="Ginventario.php">View inventario</a></p>
 							</div>
 						</div>
 					</li>

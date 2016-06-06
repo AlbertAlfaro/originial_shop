@@ -48,8 +48,6 @@
           </tr>
         </table>
         </div>
-    </dialogiv>
-
 	</section>	
 </body>
 </html>
