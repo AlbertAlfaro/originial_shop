@@ -30,7 +30,7 @@ $mayus=strtoupper($reco);
 		<br><br>
 		<img src="http://www.talcualdigital.com/Content/images/v3/Instagram.png" class="img-responsive img-circle" alt="Responsive image">
 		<br>
-		<label>ORIGINAL SHOP MENU</label>
+		<label>ORIGINAL SHOW MENU</label>
 
 
 		<br><br>
@@ -38,7 +38,7 @@ $mayus=strtoupper($reco);
   			<li role="presentation" ><a href="menu.php">Inicio</a></li>
   			<li role="presentation"><a href="inventario.php">Inventario</a></li>
  		 	<li role="presentation"><a href="ventas.php">Ventas</a></li>
- 		 	<li role="presentation"><a href="empleados.php">Administración</a></li>
+ 		 	<li role="presentation"><a href="administracion.php">Administración</a></li>
 
 		</ul>
 	</aside>

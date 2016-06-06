@@ -16,15 +16,20 @@
 	<section>
 		<div id="directorio"> 
 			<br>
-			<label><a href="ventas_realizadas.php">Venta\</a></label>
+			<label><a href="#.php">Administracion\</a></label>
 			<hr>
 		</div>
 		<center>
-				<h2>Opciones de venta</h2>
+			<div class="jumbotron">
+				<h1>Opciones de ADMINISTRACION</h1>
 				<br><br>
-				<?php include "Complementos/iconos_venta.php" ?>
+				<?php include "Complementos/iconosAdministracion.php" ?>
+			</div>
 		</center>
 			
 	</section>	
+		
+
+
 </body>
 </html>
