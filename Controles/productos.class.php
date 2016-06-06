@@ -4,7 +4,7 @@ class Productos
     public function  __construct() {
         $dbhost = 'localhost';
         $dbuser = 'root';
-        $dbpass = '1234';
+        $dbpass = '3ktr95';
         $dbname = 'db_originalShop';
 
         mysql_connect($dbhost, $dbuser, $dbpass);
