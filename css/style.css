@@ -27,13 +27,16 @@
 /*Hasta aqui*/
 
 .ch-img-1 { 
-	background-image: url(../img/pago.png);
+	background-image: url(../img/1.png);
 }
 .ch-img-2 { 
 	background-image: url(../img/2.jpg);
 }
 .ch-img-3 { 
 	background-image: url(../img/3.jpg);
+}
+.ch-img-4 { 
+	background-image: url(../img/5.jpg);
 }
 
 .ch-info {

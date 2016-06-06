@@ -27,4 +27,41 @@ section #directorio{font-size: 16px; background:#CACCCC; width: 100%; height: 65
   line-height: 1.428571429;
   border-radius: 15px;
 }
+
 .panel_body{width: 95%; margin: auto; margin-top: 10px;}
+
+#barra{float: left;margin-top: 10px; background: #000;}
+.navbar .navbar-nav {
+	
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+#cuadro{
+  float: left;
+  padding: 10px;
+  width: 1015px;
+  height: auto;
+}
+#tablas{
+	 
+	float: left;
+	padding: 10px;
+	width: 1015px;
+	height: 250px;
+  overflow: scroll;
+	
+}
+#tabla2{
+
+  float: left;
+  margin: 10px;
+  padding: 10px;
+  width: 1006;
+  height: 250px;
+  overflow: scroll;
+}
+>>>>>>> 47a5cc4eb977671fa839d968f6e4d5724fd46d9d
