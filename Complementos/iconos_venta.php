@@ -9,23 +9,28 @@
 <div class="container">
 <section class="main">
 			
+				
 				<ul class="ch-grid">
+				<a href="factura.php">
 					<li>
-						<div class="ch-item ch-img-1">
+						<div class="ch-item fac-img-1">
 							<div class="ch-info">
 								<h3>Realizar venta </h3>
-								<p>Original Shop <a href="factura.php">Ingresa</a></p>
+								<p>Original Shop</p>
 							</div>
 						</div>
 					</li>
+				</a>
+				<a href="factura.php">
 					<li>
-						<div class="ch-item ch-img-2">
+						<div class="ch-item fac-img-2">
 							<div class="ch-info">
 								<h3>Ventas Realizadas</h3>
-								<p>Original Shop <a href="http://drbl.in/eOPF">Ingresar</a></p>
+								<p>Original Shop</p>
 							</div>
 						</div>
 					</li>
+				</a>
 				</ul>
 				
 </section>

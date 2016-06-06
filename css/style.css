@@ -13,16 +13,25 @@
 	-o-transition: all 0.4s ease-in-out;
 	-ms-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
+	cursor: pointer;
 }
+
+/*Ionos para el modulo de venta*/
+.fac-img-1 { 
+	background-image: url(../img/facturaicon.png);
+}
+
+.fac-img-2 { 
+	background-image: url(../img/ventas.png);
+}
+/*Hasta aqui*/
 
 .ch-img-1 { 
 	background-image: url(../img/pago.png);
 }
-
 .ch-img-2 { 
 	background-image: url(../img/2.jpg);
 }
-
 .ch-img-3 { 
 	background-image: url(../img/3.jpg);
 }
