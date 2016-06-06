@@ -6,36 +6,64 @@
 	<link rel="StyleSheet" href="css/style_menu.css" type="text/css"></link>	
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap.css" type="text/css"></link>
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap-theme.min.css" type="text/css"></link>
+  <link rel="stylesheet" href="Bootstrap/css/bootstrap-select.css">
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script src="jquery-ui/jquery-ui.js"></script> 
   <script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="Bootstrap/js/bootstrap-select.js"></script>
 </head>
 <body>
 	<?php include("Complementos/menu-cabezado.php");?>
 	<section>
 		<div id="directorio"> 
 			<br>
-			<label><a href="empleados.php">Empleados\</a></label>
+			<label><a href="ventas.php">Ventas\</a><a href="ventas_realizadas.php">Ventas Realizadas</a></label>
 			
 		</div>
 		<br><br>
-<<<<<<< HEAD
     <div class="panel panel-default" style="width: 80%; margin: auto;">
       <div class="panel-heading">Empleados </div>
       <div class="panel_body">
-        <button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar</button>
-        <br><br>
+        <a href="factura.php"><button type="button" class="btn btn-success glyphicon glyphicon-plus"> Facturar</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-file"> Reporte</button>
+        <hr>
+        <div class="bus">
+            <label for="recipient-name" class=" control-label">
+            <input type="text" class="form-control" id="busqueda" placeholder="Buscar...">
+            </label>
+        </div>
+        <br>
         <table class="table table-hover">
           <tr>
-            <td>Id</td>
-            <td><strong>Nombre</strong></td>
-            <td><strong>Tipo</strong></td>
+            <td><strong>N° de Factura</strong></td>
+            <td><strong>Cliente</strong></td>
+            <td><strong>Fecha</strong></td>
+            <td><strong>Total</strong></td>
             <td><strong>Accion</strong></td>
           </tr>
           <tr>
-            <td>1</td>
-            <td>Alfaro</td>
-            <td>Administrador</td>
+            <td>0001</td>
+            <td>Juan Perez</td>
+            <td>02-06-2016</td>
+            <td>$ 40.53</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
+                  <li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
+                  <li data-toggle="modal" data-target="#mymodal"> <a id="send" class="open-modal glyphicon glyphicon-zoom-in"> Ver detalles</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>0002</td>
+            <td>Juan Fernandez</td>
+            <td>02-06-2016</td>
+            <td>$ 34.2</td>
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
@@ -49,42 +77,22 @@
           </tr>
         </table>
         </div>
-    </dialogiv>
-=======
-		<div class="panel panel-default" style="width: 80%; margin: auto;">
-  		<div class="panel-heading">Empleados</div>
-  		<div class="panel-body">
-    		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar</button>
-    		<br><br>
-    		<div id="table"></div>
-    		<table class="table table-hover">
-      		<tr>
-        		<td>Id</td>
-        		<td><strong>Nombre</strong></td>
-        		<td><strong>Tipo</strong></td>
-        		<td><strong>Accion</strong></td>
-      		</tr>
-      		<?php 
-          if(isset($consul)){
-      		while($datos= mysql_fetch_array($consul)){
-      		}
-          ?>
-      		<tr>
-        		<td><?php echo $datos[0] ?></td>
-        		<td><?php echo $datos[1] ?></td>
-        		<td><?php echo $datos[3] ?></td>
-        		<td>
-          		<div class="btn-group">
-            		<button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
-            		</button>
-            		<ul class="dropdown-menu">
-              		<li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-              		<li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
-            		</ul>
-          		</div>
->>>>>>> 731bcf35497067291d56e1c8279e8e09f87e1cc7
-
-	</section>	
+        <nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">Previous</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+	</section>
 </body>
 </html>
 
