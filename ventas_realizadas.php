@@ -52,8 +52,7 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-                  <li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
-                  <li data-toggle="modal" data-target="#mymodal"> <a id="send" class="open-modal glyphicon glyphicon-zoom-in"> Ver detalles</a></li>
+                  <li data-toggle="modal" data-target="#mymodal"> <a id="send" class="open-modal glyphicon glyphicon-zoom-in" style="cursor: pointer"> Ver detalles</a></li>
                 </ul>
               </div>
             </td>
@@ -70,7 +69,8 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-                  <li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
+                  <li data-toggle="modal" data-target="#mymodal"> <a id="send" class="open-modal glyphicon glyphicon-zoom-in" style="cursor: pointer"> Ver detalles</a></li>
+                
                 </ul>
               </div>
             </td>
@@ -96,54 +96,12 @@
 </body>
 </html>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="Mymodal" aria-labelledby="gridSystemModalLabel">
+<div class="modal fade" tabindex="-1" role="dialog" id="mymodal" aria-labelledby="gridSystemModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="gridSystemModalLabel">Registro empleados</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-4">.col-md-4</div>
-          <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
-          <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-9">
-            Level 1: .col-sm-9
-            <div class="row">
-              <div class="col-xs-8 col-sm-6">
-                Level 2: .col-xs-8 .col-sm-6
-              </div>
-              <div class="col-xs-4 col-sm-6">
-                Level 2: .col-xs-4 .col-sm-6
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-<div class="modal fade" tabindex="-1" role="dialog" id="Mymodal1" aria-labelledby="gridSystemModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Modificacion empleados</h4>
       </div>
       <div class="modal-body">
         <div class="row">

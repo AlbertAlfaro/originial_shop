@@ -265,8 +265,21 @@ switch ($op) {
 			echo "error";
 		}
 		break;
+	case 'updateEmpleado':
+		$nomE=$_POST['nameE'];
+		$apelliE=$_POST['lastnameE'];
+		$idE=$_POST['localE'];
+		$idd=$_POST['id'];
+		if($llamar -> updateEmpleado($nomE, $apelliE, $idE, $idd)){
+			echo "exito";
+		}else{
+			echo mysql_error();
+			echo "error";
+		}
+		break;
 
 	
  
 }
+
 ?>

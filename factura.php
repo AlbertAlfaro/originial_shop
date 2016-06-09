@@ -20,8 +20,9 @@ $cliente=mysql_query("SELECT *FROM cliente");
   <link type="text/css" rel="stylesheet" href="jquery-ui/jquery-ui.min.css" />
   <link href="css/toastr.css" rel="stylesheet" type="text/css" />
   <link rel="StyleSheet" href="css/progressBar.css" type="text/css"></link>
+  <link rel="stylesheet" href="css/alertify.core.css" />
+  <link rel="stylesheet" href="css/alertify.default.css" />
   <script type="text/javascript" src="js/progressBar.js"></script>
-
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script src="jquery-ui/jquery-ui.js"></script> 
   <script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
@@ -30,6 +31,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
   <script type="text/javascript" src="progreso/jquery-progreso.js"></script>
   <script type="text/javascript" src="progreso/main.js"></script>
   <script src="js/toastr.js"></script>
+  <script type="text/javascript" src="js/alertify.js"></script>
  
 
     
@@ -155,7 +157,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Imprimir</button>
+        <button type="button" class="btn btn-primary" >Imprimir</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -201,7 +203,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-success" onclick="agregarcliente();">Guardar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -233,6 +235,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
   var contador=0;
   var total=0;
   var subtotal=0;
+  var exi=0;
   function selecionar(id_fila){
     $('#'+id_fila).remove();
 
@@ -245,7 +248,9 @@ $cliente=mysql_query("SELECT *FROM cliente");
       if($("#subtotal"+x).text() != '')
       $('#total').text('Total: $ '+total);
       $('#total-modal').text('$ '+total);
-
+      exi++;
+      }else{
+        $('#total').text("");
       }
 
       }
@@ -258,11 +263,13 @@ $(document).ready(function () {
       for(var n=1; n<=contador; n++){
         var presio=$("#presio"+n).val()
         var cantidad=$("#cantidad"+n).val()
+        var stock=$("#stock"+n).text()
+        alert(stock);
         subto=parseFloat(presio)*parseFloat(cantidad)
         if($("#presio"+n).val() != '' && $("#cantidad"+n).val() != ''){
         $('#subtotal'+n).text('$ '+subto);
 
-      }
+        }
       }
       for(var x=1;x<=contador; x++){
       if($("#presio"+x).length != 0 && $("#cantidad"+x).length !=0 ){
@@ -299,7 +306,7 @@ $(document).ready(function () {
                     var idd=ui.item.id_producto;
 
                     contador++;
-                    var fila='<tr id="fila'+contador+'"><td><p id="idproducto'+contador+'">'+idd+'</p></td><td>'+'('+ui.item.id_producto+')'+ui.item.nombre+'</td><td>'+ui.item.cantidad+'</td><td><select class="form-control" id="select'+contador+'"><option>'+ui.item.precioCompra+'</option><option>'+ui.item.precioVenta+'</option></select></td><td><input type="text" name="presiov" class="form-control" id="presio'+contador+'"></td><td><input type="text" name="cant"  id="cantidad'+contador+'" size="20" class="form-control"></td><td><p id="subtotal'+contador+'"></p></td><td><span class="glyphicon glyphicon-remove-circle" style="cursor: pointer" aria-hidden="true" id="fila'+contador+'" onclick="selecionar(this.id);"></span></td></tr>';
+                    var fila='<tr id="fila'+contador+'"><td><p id="idproducto'+contador+'">'+idd+'</p></td><td>'+'('+ui.item.id_producto+')'+ui.item.nombre+'</td><td><p id="stock"'+contador+'>'+ui.item.cantidad+'</p></td><td><select class="form-control" id="select'+contador+'"><option>'+ui.item.precioCompra+'</option><option>'+ui.item.precioVenta+'</option></select></td><td><input type="text" name="presiov" class="form-control" id="presio'+contador+'"></td><td><input type="text" name="cant"  id="cantidad'+contador+'" size="20" class="form-control"></td><td><p id="subtotal'+contador+'"></p></td><td><span class="glyphicon glyphicon-remove-circle" style="cursor: pointer" aria-hidden="true" id="fila'+contador+'" onclick="selecionar(this.id);"></span></td></tr>';
                     
                     $('#detalle-fac tr:last').after(fila);
 
@@ -349,6 +356,43 @@ function guardar(){
 
 
 }
+function agregarcliente(){
+    var nombre=$('#nombre').val();
+    var apellido=$('#apellido').val();
+    var direccion=$('#direccion').val();
+    var telefono=$('#telefono').val();
+    $.ajax({
+      url:'Controles/procesos.php',
+      type:'POST',
+      success:function(respuesta){
+        if(respuesta=="exito"){
+          exito();
+        }
+        if(respuesta=="error"){
+          error();
+        }
+      },
+      data:{
+        name:nombre,
+        lastname:apellido,
+        address:direccion,
+        telephone:telefono,
+        op:'guardarCliente'
+      }
+
+    });
+
+  }
+
+  function error(){
+        alertify.error("Error al registrar cliente"); 
+        //return false; 
+  }
+  function exito(){
+    alertify.success("Cliente agregado exitosamente.");
+        //return false; 
+  }
+
 
 // processBar
 
@@ -489,6 +533,5 @@ $(function () {
         }
         
     })
-
 
 </script>
