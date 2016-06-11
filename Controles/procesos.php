@@ -180,6 +180,70 @@ class process{
 		die();
 
 	}
+	// funciones de fatura 
+	function facturaBD($id_cliente,$fecha,$total){
+		$sql=mysql_query(" INSERT INTO factura (id_cliente,fecha,total) VALUES ('$id_cliente','$fecha','$total')");
+		
+		if($sql){
+			return true;
+		}else{
+
+			return false;
+		}
+
+		//close conexion 
+		mysqli_close($link);
+		die();
+
+	}
+	function detalleFacturaDB($id_factura,$id_producto,$presioVenta,$cantidad,$subtotal){
+		$sql=mysql_query("INSERT INTO detalleFactura (id_factura,id_producto,presioVendido,cantidad,subtotal) VALUES('$id_factura','$id_producto','$presioVenta','$cantidad','$subtotal')");
+		if($sql){
+			return true;
+		}else{
+
+			return false;
+		}
+
+		//close conexion 
+		mysqli_close($link);
+		die();
+
+	}
+	function descontarStock($id_producto,$cantidad){
+
+		$sql=mysql_query("UPDATE producto SET cantidad=cantidad-'$cantidad' WHERE id_producto='$id_producto'");
+		if($sql){
+			return true;
+		}else{
+
+			return false;
+		}
+		//close conexion 
+		mysqli_close($link);
+		die();
+
+	}
+	function maxidFactura(){
+
+		$sql=mysql_query("SELECT MAX(id_factura) AS ultimo FROM factura");
+		while($maxid= mysql_fetch_array($sql)){
+		    $maxidfac=$maxid[0];
+	    }
+
+		if($sql){
+			return $maxidfac;
+		}else{
+
+			return false;
+		}
+		//close conexion 
+		mysqli_close($link);
+		die();
+
+	}
+
+	//Fin codigo de factura
 
 
 }
@@ -265,8 +329,42 @@ switch ($op) {
 			echo "error";
 		}
 		break;
+	case 'updateEmpleado':
+		$nomE=$_POST['nameE'];
+		$apelliE=$_POST['lastnameE'];
+		$idE=$_POST['localE'];
+		$idd=$_POST['id'];
+		if($llamar -> updateEmpleado($nomE, $apelliE, $idE, $idd)){
+			echo "exito";
+		}else{
+			echo mysql_error();
+			echo "error";
+		}
+		break;
+	case 'factura':
+		$cliente=$_POST['cliente'];
+		$fecha=$_POST['fecha'];
+		$total=$_POST['total'];
+		$ids=json_decode($_POST['idss']);
+		$cantidads=json_decode($_POST['cantidads']);
+		$precios=json_decode($_POST['precios']);
+		$subtotals=json_decode($_POST['subtotals']);
+		$nfor=count($ids);
+		if($llamar->facturaBD($cliente,$fecha,$total)){
+			$id_factura=$llamar->maxidFactura();
+			for($x=0;$x<$nfor;$x++){
+				$llamar->detalleFacturaDB($id_factura,$ids[$x],$precios[$x],$cantidads[$x],$subtotals[$x]);
+				$llamar->descontarStock($ids[$x],$cantidads[$x]);
+			}
+			echo "exito";
+		}else{
+			echo "error";
+		}
+
+		break;
 
 	
  
 }
+echo "exito";
 ?>

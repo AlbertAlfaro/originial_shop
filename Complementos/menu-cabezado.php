@@ -20,6 +20,7 @@ session_start();
   			</button>
   			<a href="">&nbsp;&nbsp;<?php if(isset($_SESSION['nombre_usuario'])){echo $_SESSION['nombre_usuario'];} ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
   			<span class="label label-primary">&nbsp; <?php if(isset($_SESSION['tipo_usuario'])){echo $_SESSION['tipo_usuario'];} ?> &nbsp;</span>
+  			<a href="#"> &nbsp; &nbsp; &nbsp; <span class="label label-warning">&nbsp; Backup &nbsp;</span></a>
   			
 		</div>
 	</header>

@@ -20,8 +20,9 @@ $cliente=mysql_query("SELECT *FROM cliente");
   <link type="text/css" rel="stylesheet" href="jquery-ui/jquery-ui.min.css" />
   <link href="css/toastr.css" rel="stylesheet" type="text/css" />
   <link rel="StyleSheet" href="css/progressBar.css" type="text/css"></link>
+  <link rel="stylesheet" href="css/alertify.core.css" />
+  <link rel="stylesheet" href="css/alertify.default.css" />
   <script type="text/javascript" src="js/progressBar.js"></script>
-
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script src="jquery-ui/jquery-ui.js"></script> 
   <script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
@@ -30,6 +31,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
   <script type="text/javascript" src="progreso/jquery-progreso.js"></script>
   <script type="text/javascript" src="progreso/main.js"></script>
   <script src="js/toastr.js"></script>
+  <script type="text/javascript" src="js/alertify.js"></script>
  
 
     
@@ -49,12 +51,12 @@ $cliente=mysql_query("SELECT *FROM cliente");
       <label>Seleccione cliente: </label>
       <div class="form-group">
           <select class="selectpicker" data-style="btn-success" id="cliente" name="cliente">
-                <option value="" selected="selected">Seleccione</option>
-                <option value="General">General</option>
-                <?php while($datos= mysql_fetch_array($cliente)){ ?>
-                <option value="<?php echo $datos[0];?>"><?php echo $datos[1]." ".$datos[2];?></option>
-                <?php }?>
-              </select>
+            <option value="" selected="selected">Seleccione</option>
+            <option value="0">General</option>
+            <?php while($datos= mysql_fetch_array($cliente)){ ?>
+            <option value="<?php echo $datos[0];?>"><?php echo $datos[1]." ".$datos[2];?></option>
+            <?php $nid=$datos[0];}?>
+          </select>
         </div>
     </div>
     <div id="nuevo-client">
@@ -93,8 +95,11 @@ $cliente=mysql_query("SELECT *FROM cliente");
       </table>
       <label id="total"></label>
       <br>
-      <button type="button" class="btn btn-success" onclick="guardar();">Guardar</button>
-      <button data-toggle="modal" data-target="#mymodal" type="button" class="btn btn-success" id="showtoast">Guardarprogreso</button>
+      <label id="total-letras" style="color:"></label>
+      <br>
+      <br>
+      <button type="button" class="btn btn-success" onclick="guardar();" id="showtoast">Guardar</button>
+      <button data-toggle="modal" data-target="#mymodadl" type="button" onclick="tiempo();" class="btn btn-success">Guardarprogreso</button>
       <br>
       <br>
       <div class="progress">
@@ -127,7 +132,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
         <div class="form-group">
             <label for="recipient-name" class="control-label">Cliente: </label>
             
-              <label for="recipient-name" class="control-label">Juan Perez</label>
+              <label for="recipient-name" class="control-label" id="nomcliente"></label>
             
         </div>
       
@@ -154,8 +159,8 @@ $cliente=mysql_query("SELECT *FROM cliente");
         .
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Imprimir</button>
+        <button type="button" class="btn btn-default">Ver Factura</button>
+        <button type="button" class="btn btn-primary">Imprimir Factura</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -201,7 +206,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-success" onclick="agregarcliente();">Guardar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -233,20 +238,25 @@ $cliente=mysql_query("SELECT *FROM cliente");
   var contador=0;
   var total=0;
   var subtotal=0;
+  var exi=0;
   function selecionar(id_fila){
     $('#'+id_fila).remove();
 
-    for(var x=1;x<=contador; x++){
+      for(var x=1;x<=contador; x++){
 
-      if($("#presio"+x).length != 0 && $("#cantidad"+x).length !=0 ){
-      subtotal=$('#subtotal'+x).text();
-      var res = subtotal.slice(1,100);
-      total=parseFloat(total)+parseFloat(res);
-      if($("#subtotal"+x).text() != '')
-      $('#total').text('Total: $ '+total);
-      $('#total-modal').text('$ '+total);
-
-      }
+        if($("#presio"+x).length != 0 && $("#cantidad"+x).length !=0 ){
+          subtotal=$('#subtotal'+x).text();
+          var res = subtotal.slice(1,100);
+          total=parseFloat(total)+parseFloat(res);
+          if($("#subtotal"+x).text() != '')
+            $('#total').text('Total: $ '+total);
+            $('#total-modal').text('$ '+total);
+            exi++;
+        }else{
+          $('#total').text("");
+          $('#total-modal').text("");
+          $("#total-letras").text("");
+        }
 
       }
 
@@ -258,21 +268,47 @@ $(document).ready(function () {
       for(var n=1; n<=contador; n++){
         var presio=$("#presio"+n).val()
         var cantidad=$("#cantidad"+n).val()
+        var stock=$("#stock"+n).text();
+        var pcompra=$("#pcompra"+n).val();
+        /*var npresio=pcompra.length;
+        if(presio<pcompra){
+          if ($("#presio"+n).val()!=""){
+            $("#presio"+n).val(pcompra);
+          }
+        }*/
+        if(parseFloat(cantidad)>parseFloat(stock)){
+          $("#cantidad"+n).val(stock);
+        }
         subto=parseFloat(presio)*parseFloat(cantidad)
         if($("#presio"+n).val() != '' && $("#cantidad"+n).val() != ''){
-        $('#subtotal'+n).text('$ '+subto);
+          $('#subtotal'+n).text('$ '+subto);
 
-      }
+        }
       }
       for(var x=1;x<=contador; x++){
-      if($("#presio"+x).length != 0 && $("#cantidad"+x).length !=0 ){
-      subtotal=$('#subtotal'+x).text();
-      var res = subtotal.slice(1,100);
-      total=parseFloat(total)+parseFloat(res);
-      if($("#subtotal"+x).text() != '')
-      $('#total').text('Total: $ '+total);
-      $('#total-modal').text('$ '+total);
-      }
+        if($("#presio"+x).length != 0 && $("#cantidad"+x).length !=0 ){
+        subtotal=$('#subtotal'+x).text();
+        var res = subtotal.slice(1,100);
+        total=parseFloat(total)+parseFloat(res);
+        if($("#subtotal"+x).text() != '')
+          $('#total').text('Total: $ '+total);
+          $('#total-modal').text('$ '+total);
+
+
+        }
+        if($("#presio"+x).val()!="" && $("#cantidad"+x).val()!=""){
+          $.ajax({
+            url:'Controles/NumAletras.php',
+            type:'POST',
+            success:function(respuesta){
+              $("#total-letras").text(respuesta);
+            },
+            data:{
+              post_total:total
+            }
+
+          });
+        }
       }
 
       total=0;
@@ -284,28 +320,28 @@ $(document).ready(function () {
       var efectivo=$('#efectivo').val();
       var cambio=0;
       cambio=parseFloat(efectivo)-parseFloat(recotet);
-      if(cambio=>0){
+      if(parseFloat(cambio)>=0){
         $('#cambio-modal').text('$ '+cambio);
       }
       
     });
-    });
+});
 
-             $(function(){//utizamos jquery
-                $('#buscar').autocomplete({// aqui utilizamos ui
-                   source : 'Controles/ajax.php',// enviamos a ajax,.pph
-                   select : function(event, ui){
-                    var des=ui.item.codigobarra;
-                    var idd=ui.item.id_producto;
+$(function(){//utizamos jquery
+  $('#buscar').autocomplete({// aqui utilizamos ui
+    source : 'Controles/ajax.php',// enviamos a ajax,.pph
+    select : function(event, ui){
+      var des=ui.item.codigobarra;
+      var idd=ui.item.id_producto;
+      contador++;
+      var fila='<tr id="fila'+contador+'"><td><p id="idproducto'+contador+'">'+idd+'</p></td><td>'+'('+ui.item.id_producto+')'+ui.item.nombre+'</td><td><p id="stock'+contador+'">'+ui.item.cantidad+'</p></td><td><select class="form-control" id="select'+contador+'"><option id="pcompra'+contador+'" value="'+ui.item.precioCompra+'">'+ui.item.precioCompra+'</option><option id="pventa'+contador+'" value="'+ui.item.precioVenta+'">'+ui.item.precioVenta+'</option></select></td><td><input type="text" name="presiov" style="width:90px;" class="form-control" id="presio'+contador+'"></td><td><input type="text" name="cant"  id="cantidad'+contador+'" style="width:90px;" class="form-control"></td><td><p id="subtotal'+contador+'"></p></td><td><span class="glyphicon glyphicon-remove-circle" style="cursor: pointer" aria-hidden="true" id="fila'+contador+'" onclick="selecionar(this.id);"></span></td></tr>';            
+      $('#detalle-fac tr:last').after(fila);
 
-                    contador++;
-                    var fila='<tr id="fila'+contador+'"><td><p id="idproducto'+contador+'">'+idd+'</p></td><td>'+'('+ui.item.id_producto+')'+ui.item.nombre+'</td><td>'+ui.item.cantidad+'</td><td><select class="form-control" id="select'+contador+'"><option>'+ui.item.precioCompra+'</option><option>'+ui.item.precioVenta+'</option></select></td><td><input type="text" name="presiov" class="form-control" id="presio'+contador+'"></td><td><input type="text" name="cant"  id="cantidad'+contador+'" size="20" class="form-control"></td><td><p id="subtotal'+contador+'"></p></td><td><span class="glyphicon glyphicon-remove-circle" style="cursor: pointer" aria-hidden="true" id="fila'+contador+'" onclick="selecionar(this.id);"></span></td></tr>';
-                    
-                    $('#detalle-fac tr:last').after(fila);
+    }
+  });
+});
 
-                   }
-                });
-            });
+
 function guardar(){
   var ids=[];
   var idproducto;
@@ -321,6 +357,7 @@ function guardar(){
         can=$('#cantidad'+x).val();
         prec=$('#presio'+x).val();
         subt=$('#subtotal'+x).text();
+        subt=subt.slice(2,100)
         ids.push(idproducto);
         cantidads.push(can);
         precios.push(prec);
@@ -329,26 +366,93 @@ function guardar(){
       }
       }
       //alert(ids);
-      alert('ids=('+ids+') precios=('+precios+') cantidades=('+cantidads+') subtotal=('+subtotals+')');
+
 
   var cliente=$('#cliente').val();
   var fecha=$('#fecha1').val();
   var total=$('#total').text();
   var recor=total.slice(9,100);
-
+  //alert('cliente='+cliente+' fecha='+fecha+' ids=('+ids+') precios=('+precios+') cantidades=('+cantidads+') subtotal=('+subtotals+')'+' total'+recor);
   $.ajax({
-    url:'ajax/registro_factura.php',
-    type:'POST',
-    data:'cliente='+cliente+'&fecha='+fecha+'&total='+recor+'&ids='+ids
-  }).done(function(respuesta){
+      url:'Controles/procesos.php',
+      type:'POST',
+      success:function(respuesta){
+        if(respuesta=="exito"){
+          var cliente=$("#cliente option:selected").html();
+          $("#nomcliente").text(cliente);
+          $('#mymodal').modal('show');
+        }
+        if(respuesta=="error"){
+          error();
+        }
+      },
+      data:{
+        cliente:cliente,
+        fecha:fecha,
+        total:recor,
+        idss:JSON.stringify(ids),
+        cantidads:JSON.stringify(cantidads),
+        precios:JSON.stringify(precios),
+        subtotals:JSON.stringify(subtotals),
+        op:"facturaa"
+      }
 
-    //alert(respuesta);
-
-
-  });
+    });
 
 
 }
+var ncliente=1;
+function agregarcliente(){
+    var nombre=$('#nombre').val();
+    var apellido=$('#apellido').val();
+    var direccion=$('#direccion').val();
+    var telefono=$('#telefono').val();
+    $.ajax({
+      url:'Controles/procesos.php',
+      type:'POST',
+      success:function(respuesta){
+        if(respuesta=="exito"){
+          exito();
+          $('#mymodal1').modal('hide');
+          var nids="<?php echo $nid; ?>"; 
+          //var nselect=$('#cliente option').size();
+          if(nids==""){ nids=1;}else{
+          nids=parseFloat(nids) + parseFloat(ncliente);
+          }
+          $('#cliente').append('<option value="'+nids+'">'+nombre+' '+apellido+'</option>');
+          $('.selectpicker').selectpicker('refresh');
+          $('#nombre').val("");
+          $('#apellido').val("");
+          $('#direccion').val("");
+          $('#telefono').val("");
+
+          ncliente++;
+        }
+        if(respuesta=="error"){
+          error();
+        }
+      },
+      data:{
+        name:nombre,
+        lastname:apellido,
+        address:direccion,
+        telephone:telefono,
+        op:'guardarCliente'
+      }
+
+    });
+
+  }
+
+  function error(){
+        alertify.error("Error al registrar cliente"); 
+        //return false; 
+  }
+  function exito(){
+    alertify.success("Cliente agregado exitosamente.");
+        //return false; 
+  }
+
 
 // processBar
 
@@ -489,6 +593,4 @@ $(function () {
         }
         
     })
-
-
 </script>
