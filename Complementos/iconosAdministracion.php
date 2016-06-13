@@ -31,7 +31,7 @@
 		</a>
 		<a href="verAdmin.php">
 			<li>
-				<div class="ch-item ch-img-3">
+				<div class="ch-item ch-img3-3">
 					<div class="ch-info">
 						<h3>Modificación de Datos</h3>
 							<p>Original Shop </p>
