@@ -1,3 +1,4 @@
+<?php include("Complementos/validador.php");?>
 <link rel="StyleSheet" href="Bootstrap/css/bootstrap.css" type="text/css"></link>
 <link rel="StyleSheet" href="Bootstrap/css/bootstrap-theme.min.css" type="text/css"></link>
 <link rel="stylesheet" href="Bootstrap/css/bootstrap-select.css">

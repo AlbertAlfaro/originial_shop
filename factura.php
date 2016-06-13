@@ -1,3 +1,4 @@
+<?php include("Complementos/validador.php");?>
 <?php 
 include('Complementos/conexion.php');
 $cliente=mysql_query("SELECT *FROM cliente");

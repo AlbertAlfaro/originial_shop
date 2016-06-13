@@ -5,7 +5,7 @@ header b{color:#fff; margin-left: 30px; font-size: 18px; margin-top: 2px;}
 header #titulo{ font-size: 24px;color: #fff;margin-left: 20px;margin-top: 15px;}
 header #subtitulo{ font-size: 14px;color: #fff;margin-left: 29px; margin-top: -10px;}
 section{margin-top: -565px;  margin-left: 250px; background: #eee;}
-#tab{ width: 60%;}
+#tab{ width: 70%; margin: auto;}
 #op-usuario-noti{margin-left: 70%; margin-top: -29px;}
 nav{ width: 100%;height: 1.5px; background: #0E92BE;float:left;}
 aside{ width: 18%; height: 564px; background:#262626; float: left; color: #fff; float:left;}

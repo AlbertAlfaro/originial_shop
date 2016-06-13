@@ -7,9 +7,27 @@ if(!isset($_SESSION))
 
 session_start();
 }  
-
-
 class process{
+
+	function historial($descripcion){
+		$fecha=date("y-m-d");
+		$hora=date("h:i a");
+		$id_usuario=$_SESSION['nombre_usuario'];
+
+		$sql = mysql_query("INSERT INTO historial (descripcion,fecha,hora,nombre_usuario) VALUES ('$descripcion','$fecha','$hora','$id_usuario')");
+		if($sql){
+
+			return true;
+		}else{
+
+			return false;
+		}
+
+		//close conexion 
+		mysqli_close($link);
+		die();
+
+	}
 
 	function login($user,$clave){
 		$seguridad="$/adhi?$";
@@ -254,6 +272,7 @@ switch ($op) {
 		$user=$_POST['user'];
 		$clave=$_POST['pass'];
 		if($llamar -> login($user,$clave)){
+			$llamar->historial("Login efectuado");
 			echo "exito";
 		}else{
 			echo "error";
@@ -265,6 +284,7 @@ switch ($op) {
 		$direcc=$_POST['address'];
 		$telef=$_POST['telephone'];
 		if($llamar -> guardarCliente($nom,$ape, $direcc, $telef)){
+			$llamar->historial("Se registro un Cliente");
 			echo "exito";
 		}else{
 			echo "error";
@@ -275,6 +295,7 @@ switch ($op) {
 		$direccS=$_POST['addressS'];
 		$telefS=$_POST['telephoneS'];
 		if($llamar -> guardarSucursal($nomS, $direccS, $telefS)){
+			$llamar->historial("Se registro una Sucursal");
 			echo "exito";
 		}else{
 			echo mysql_error();
@@ -286,6 +307,7 @@ switch ($op) {
 		$apelliE=$_POST['lastnameE'];
 		$idE=$_POST['localE'];
 		if($llamar -> guardarEmpleado($nomE, $apelliE, $idE)){
+			$llamar->historial("Se registro un Empleado");
 			echo "exito";
 		}else{
 			echo mysql_error();
@@ -297,6 +319,7 @@ switch ($op) {
 		$direccP=$_POST['addressP'];
 		$telefP=$_POST['telephoneP'];
 		if($llamar -> guardarProveedor($nomP, $direccP, $telefP)){
+			$llamar->historial("Se registro un Proveedor");
 			echo "exito";
 		}else{
 			echo mysql_error();
@@ -310,6 +333,7 @@ switch ($op) {
 		$telef=$_POST['telephone'];
 		$idenC=$_POST['id'];
 		if($llamar -> updateCliente($nom,$ape, $direcc, $telef, $idenC)){
+			$llamar->historial("Se actualizon datos de cliente");
 			echo "exito";
 		}else{
 			echo "error";
@@ -322,6 +346,7 @@ switch ($op) {
 		$idE=$_POST['localE'];
 		$idd=$_POST['id'];
 		if($llamar -> updateEmpleado($nomE, $apelliE, $idE, $idd)){
+			$llamar->historial("Se actualizon datos de Empleado");
 			echo "exito";
 		}else{
 			echo mysql_error();
@@ -334,6 +359,7 @@ switch ($op) {
 		$idE=$_POST['localE'];
 		$idd=$_POST['id'];
 		if($llamar -> updateEmpleado($nomE, $apelliE, $idE, $idd)){
+			$llamar->historial("Se actualizon datos de Empleado");
 			echo "exito";
 		}else{
 			echo mysql_error();
@@ -363,6 +389,7 @@ switch ($op) {
 				$llamar->detalleFacturaDB($id_factura,$ids[$x],$precios[$x],$cantidads[$x],$subtotals[$x]);
 				$llamar->descontarStock($ids[$x],$cantidads[$x]);
 			}
+			$llamar->historial("Se realizo un venta");
 			echo "exito";
 		}else{
 			echo "error";
@@ -408,4 +435,5 @@ switch ($op) {
 	
  
 }
+
 ?>

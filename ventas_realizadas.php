@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8" >
-	<title>ORIGINAL SHOP | MENU </title>
+	<title>ORIGINAL SHOP | VENTAS </title>
 	<link rel="StyleSheet" href="css/style_areglo.css" type="text/css"></link>	
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap.css" type="text/css"></link>
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap-theme.min.css" type="text/css"></link>
