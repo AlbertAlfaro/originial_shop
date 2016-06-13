@@ -23,14 +23,11 @@ $cliente=mysql_query("SELECT *FROM cliente");
   <link rel="StyleSheet" href="css/progressBar.css" type="text/css"></link>
   <link rel="stylesheet" href="css/alertify.core.css" />
   <link rel="stylesheet" href="css/alertify.default.css" />
-  <script type="text/javascript" src="js/progressBar.js"></script>
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script src="jquery-ui/jquery-ui.js"></script> 
   <script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="Bootstrap/js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="Bootstrap/js/bootstrap-select.js"></script>
-  <script type="text/javascript" src="progreso/jquery-progreso.js"></script>
-  <script type="text/javascript" src="progreso/main.js"></script>
   <script src="js/toastr.js"></script>
   <script type="text/javascript" src="js/alertify.js"></script>
    
