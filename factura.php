@@ -48,7 +48,6 @@ $cliente=mysql_query("SELECT *FROM cliente");
       <div class="form-group">
           <select class="selectpicker" data-style="btn-success" id="cliente" name="cliente">
             <option value="Seleccione" selected="selected">Seleccione</option>
-            <option value="0">General</option>
             <?php while($datos= mysql_fetch_array($cliente)){ ?>
             <option value="<?php echo $datos[0];?>"><?php echo $datos[1]." ".$datos[2];?></option>
             <?php $nid=$datos[0];}?>
