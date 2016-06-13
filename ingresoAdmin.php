@@ -28,7 +28,8 @@
 						<li><a id="clients" style="cursor:pointer;" href="#"><span class="glyphicon glyphicon-pencil"></span>CLIENTES</a></li>
       			<li><a id="empleado" style="cursor:pointer;" href="#">EMPLEADOS </a></li>
       			<li><a id="locales" style="cursor:pointer;" href="#">SUCURSALES</a></li>   
-      			<li><a id="proveedores" style="cursor:pointer;" href="#">PROVEEDORES</a></li>    					
+      			<li><a id="proveedores" style="cursor:pointer;" href="#">PROVEEDORES</a></li>    
+      			<li><a id="usuarios" style="cursor:pointer;" href="#">USUARIOS</a></li>					
     			</ul>  				
     		</div>
 			</nav>

@@ -29,6 +29,13 @@ if(isset($_GET["action"])){
     <script>alert("Registro Eliminado");</script>
       <?php    
   }
+  if($_GET["action"]== "del" && $_GET["var"]== "u"){
+    mysql_query("delete from usuarios where id_usuario='$_GET[id]'");
+    echo mysql_error();
+    ?>
+    <script>alert("Registro Eliminado");</script>
+      <?php    
+  }
 
 }?>
 <html lang="es">
@@ -60,7 +67,8 @@ if(isset($_GET["action"])){
 						<li><a href="#clientes"><span class="glyphicon glyphicon-pencil"></span>CLIENTES</a></li>
       					<li><a href="#empleado">EMPLEADOS </a></li>
       					<li><a href="#sucursal">SUCURSALES</a></li>   
-      					<li><a href="#proveedor">PROVEEDORES</a></li>    					
+      					<li><a href="#proveedor">PROVEEDORES</a></li> 
+                <li><a href="#usuario">USUARIOS</a></li>    					
     				</ul>  				
     			</div>
 			</nav>
@@ -209,7 +217,48 @@ if(isset($_GET["action"])){
           </table>
         </div>
       </div>
-      
+      <div id="tabla2">
+      <p><a name="usuario"></a></p>
+      <h4>USUARIOS</h4>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr class="info">
+              <th>N</th>
+              <th>Nombre</th>
+              <th>Tipo de Usuario</th>
+              <th>Empleado</th>
+              <th>Accion</th>
+              <th>Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php 
+            $contador=0;
+            $sql_soli="SELECT *FROM usuarios order by id_usuario ASC"; //String de la consulta
+            $consulta=mysql_query($sql_soli);
+            $contar=mysql_num_rows($consulta);
+            if($contar==0) die("No hay registros para mostrar");
+              while($datos_soli= mysql_fetch_array($consulta)){
+                $ide=$datos_soli['0'];
+                $nombre=$datos_soli['1'];
+                $tip=$datos_soli['3'];
+                $id=$datos_soli['3'];
+                $contador+=1;
+                $sql_usuario="SELECT *FROM empleado where id_empleado=$ide " ; //String de la consulta
+                $consul=mysql_query($sql_usuario);
+                while($datos_usuario= mysql_fetch_array($consul)){
+                  $local=$datos_usuario['1'];
+                  echo "\t\t<tr class=\"success\"><td>".$contador."</td><td>".$nombre."</td><td>".$tip."</td><td>".$local."</td><td align=center><a href='modificarDatos.php?id=$datos_soli[id_usuario]&op=u'><img src='img/user_edit.png' border=0 title='Modificar'></a></td><td><a href=# onclick=\"javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('$_SERVER[PHP_SELF]?action=del&id=$ide&var=u')}\" ><img src='img/delete_user.png' border=0 title='Eliminar'></a></td></tr>\n";
+                  
+                }
+                
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>	
 </body>
 </html>
