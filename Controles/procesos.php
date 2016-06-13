@@ -181,8 +181,8 @@ class process{
 
 	}
 	// funciones de fatura 
-	function facturaBD($id_cliente,$fecha,$total){
-		$sql=mysql_query(" INSERT INTO factura (id_cliente,fecha,total) VALUES ('$id_cliente','$fecha','$total')");
+	function facturaBD($id_cliente,$nom_cliente,$fecha,$total){
+		$sql=mysql_query(" INSERT INTO factura (id_cliente,nombre_cliente,fecha,total) VALUES ('$id_cliente','$nom_cliente','$fecha','$total')");
 		
 		if($sql){
 			return true;
@@ -242,7 +242,6 @@ class process{
 		die();
 
 	}
-
 	//Fin codigo de factura
 
 
@@ -350,7 +349,15 @@ switch ($op) {
 		$precios=json_decode($_POST['precios']);
 		$subtotals=json_decode($_POST['subtotals']);
 		$nfor=count($ids);
-		if($llamar->facturaBD($cliente,$fecha,$total)){
+		$consulta="SELECT *FROM cliente WHERE id_cliente='$cliente'";
+		$sql = mysql_query($consulta);
+		while($da_cliente= mysql_fetch_array($sql)){
+			$nombre=$da_cliente[1];
+			$apellido=$da_cliente[2];
+		    
+	    }
+	    $nombre_cliente=$nombre." ".$apellido;
+		if($llamar->facturaBD($cliente,$nombre_cliente,$fecha,$total)){
 			$id_factura=$llamar->maxidFactura();
 			for($x=0;$x<$nfor;$x++){
 				$llamar->detalleFacturaDB($id_factura,$ids[$x],$precios[$x],$cantidads[$x],$subtotals[$x]);
@@ -362,9 +369,43 @@ switch ($op) {
 		}
 
 		break;
+	case 'detalle-factura':
+		$id=$_POST['id_factura'];
+		$consulta="SELECT *FROM factura WHERE id_factura='$id'";
+		$sql = mysql_query($consulta);
+		//$consulta1="SELECT  detalleFactura.presioVendido,detalleFactura.cantidad, detalleFactura.subtotal, producto.nombre FROM detalleFactura,producto WHERE detalleFactura.id_producto=producto.id_producto AND detalleFactura.id_factura='$id'";
+		$sql1 = mysql_query($consulta1);
+		while($da_factura= mysql_fetch_array($sql)){
+			$nombre=$da_factura[2];
+			$fecha=$da_factura[3];
+			$total=$da_factura[4];
+		    
+	    }
+	    $datos=array("nombre" => $nombre,"fecha" => $fecha, "total" => $total);
+	    echo json_encode($datos);
+
+		break;
+
+	case 'detalle-factura-producto':
+		$id=$_POST['id_factura'];
+		$consulta="SELECT  detalleFactura.presioVendido,detalleFactura.cantidad, detalleFactura.subtotal, producto.nombre FROM detalleFactura,producto WHERE detalleFactura.id_producto=producto.id_producto AND detalleFactura.id_factura='$id'";
+		$sql = mysql_query($consulta);
+		$da_productos=array();
+		$i=0;
+		while($da_detalle= mysql_fetch_array($sql)){
+			$da_productos[$i]['presioVendido']=$da_detalle[0];
+			$da_productos[$i]['cantidad']=$da_detalle[1];
+			$da_productos[$i]['subtotal']=$da_detalle[2];
+			$da_productos[$i]['nombre']=$da_detalle[3];
+			$i++;
+
+	    }
+	    //$datos=array("nombre" => $nombre,"fecha" => $fecha, "total" => $total);
+	    echo json_encode($da_productos);
+
+		break;
 
 	
  
 }
-echo "exito";
 ?>

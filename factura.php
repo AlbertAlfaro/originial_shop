@@ -32,9 +32,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
   <script type="text/javascript" src="progreso/main.js"></script>
   <script src="js/toastr.js"></script>
   <script type="text/javascript" src="js/alertify.js"></script>
- 
-
-    
+   
 </head>
 <body>
 
@@ -51,7 +49,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
       <label>Seleccione cliente: </label>
       <div class="form-group">
           <select class="selectpicker" data-style="btn-success" id="cliente" name="cliente">
-            <option value="" selected="selected">Seleccione</option>
+            <option value="Seleccione" selected="selected">Seleccione</option>
             <option value="0">General</option>
             <?php while($datos= mysql_fetch_array($cliente)){ ?>
             <option value="<?php echo $datos[0];?>"><?php echo $datos[1]." ".$datos[2];?></option>
@@ -69,7 +67,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
     <div id="fecha">
       <label>Fecha: </label>
       <input type="text" class=" form-control datepicker" data-date-format="yyyy-mm-dd" name="fecha1" id="fecha1"
-           placeholder="Fecha">
+           placeholder="Fecha" required="">
     </div>
     <hr>
     <div id="buscar_producto">
@@ -99,7 +97,6 @@ $cliente=mysql_query("SELECT *FROM cliente");
       <br>
       <br>
       <button type="button" class="btn btn-success" onclick="guardar();" id="showtoast">Guardar</button>
-      <button data-toggle="modal" data-target="#mymodadl" type="button" onclick="tiempo();" class="btn btn-success">Guardarprogreso</button>
       <br>
       <br>
       <div class="progress">
@@ -125,10 +122,17 @@ $cliente=mysql_query("SELECT *FROM cliente");
   <div class="modal-dialog" role="document">
     <div class="modal-content modal-sm">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="location.reload();"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="gridSystemModalLabel">Factura</h4>
       </div>
       <div class="modal-body" >
+        <div class="form-group">
+            <label for="recipient-name" class="control-label">N° de Factura: </label>
+            
+              <label for="recipient-name" class="control-label" id="nFactura"></label>
+            
+        </div>
+
         <div class="form-group">
             <label for="recipient-name" class="control-label">Cliente: </label>
             
@@ -159,8 +163,8 @@ $cliente=mysql_query("SELECT *FROM cliente");
         .
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default">Ver Factura</button>
-        <button type="button" class="btn btn-primary">Imprimir Factura</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload();">Close</button>
+        <button type="button" class="btn btn-primary" onclick="viewfac();">Imprimir</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -241,6 +245,7 @@ $cliente=mysql_query("SELECT *FROM cliente");
   var exi=0;
   function selecionar(id_fila){
     $('#'+id_fila).remove();
+    //$('#subtotal'+id_fila).remove();
 
       for(var x=1;x<=contador; x++){
 
@@ -264,18 +269,21 @@ $cliente=mysql_query("SELECT *FROM cliente");
 
   }
 $(document).ready(function () {
+ 
     $('#detalle-fac').keyup(function() {
       for(var n=1; n<=contador; n++){
         var presio=$("#presio"+n).val()
         var cantidad=$("#cantidad"+n).val()
         var stock=$("#stock"+n).text();
         var pcompra=$("#pcompra"+n).val();
+
         /*var npresio=pcompra.length;
         if(presio<pcompra){
           if ($("#presio"+n).val()!=""){
             $("#presio"+n).val(pcompra);
           }
         }*/
+
         if(parseFloat(cantidad)>parseFloat(stock)){
           $("#cantidad"+n).val(stock);
         }
@@ -350,9 +358,9 @@ function guardar(){
   var precios=[];
   var prec;
   var subtotals=[];
-  var subt;
+  var subt=[];
   for(var x=1;x<=contador; x++){
-      if($('#idproducto'+x).length != 0 ){
+      if($('#idproducto'+x).length != 0 && $('#subtotal'+x).length != 0 ){
         idproducto=$('#idproducto'+x).text();
         can=$('#cantidad'+x).val();
         prec=$('#presio'+x).val();
@@ -361,9 +369,12 @@ function guardar(){
         ids.push(idproducto);
         cantidads.push(can);
         precios.push(prec);
-        subtotals.push(subt);
+        if(subt!=""){
+          subtotals.push(subt);
+        }
 
       }
+
       }
       //alert(ids);
 
@@ -373,6 +384,10 @@ function guardar(){
   var total=$('#total').text();
   var recor=total.slice(9,100);
   //alert('cliente='+cliente+' fecha='+fecha+' ids=('+ids+') precios=('+precios+') cantidades=('+cantidads+') subtotal=('+subtotals+')'+' total'+recor);
+  var nids=ids.length;
+  var nsubt=subtotals.length;
+  //alert(nids+" "+nsubt);
+  if(cliente!="Seleccione" && fecha!="" && nsubt==nids){
   $.ajax({
       url:'Controles/procesos.php',
       type:'POST',
@@ -394,12 +409,36 @@ function guardar(){
         cantidads:JSON.stringify(cantidads),
         precios:JSON.stringify(precios),
         subtotals:JSON.stringify(subtotals),
-        op:"facturaa"
+        op:"factura"
       }
 
     });
 
 
+ }else{
+
+  
+  alertify.error("Por favor rellene todo los campos/seleccione un cliente");
+
+ }
+
+ $.ajax({
+      url:'Controles/idMaxFactura.php',
+      type:'POST',
+      success:function(respuesta){
+        $("#nFactura").text(respuesta);
+      },
+
+    });
+
+}
+
+function viewfac(){
+
+  var idfactura=$("#nFactura").text();
+  //window.location.href = "viewfactura.php?id=idfactura";
+  window.open('viewfactura.php?idf='+idfactura, '_blank');
+  location.reload();
 }
 var ncliente=1;
 function agregarcliente(){
@@ -407,6 +446,7 @@ function agregarcliente(){
     var apellido=$('#apellido').val();
     var direccion=$('#direccion').val();
     var telefono=$('#telefono').val();
+    if(nombre!="" && apellido!=""){
     $.ajax({
       url:'Controles/procesos.php',
       type:'POST',
@@ -441,6 +481,11 @@ function agregarcliente(){
       }
 
     });
+
+  }else{
+     alertify.error("Porfavor llenar los campos requerios");
+
+  }
 
   }
 
