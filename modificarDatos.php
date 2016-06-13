@@ -33,7 +33,8 @@ include("Complementos/conexion.php");
 						<li><a href="#clientes"><span class="glyphicon glyphicon-pencil"></span>CLIENTES</a></li>
       					<li><a href="#empleado">EMPLEADOS </a></li>
       					<li><a href="#sucursal">SUCURSALES</a></li>   
-      					<li><a href="#proveedor">PROVEEDORES</a></li>    					
+      					<li><a href="#proveedor">PROVEEDORES</a></li>
+      					<li><a href="#usuarios">USUARIOS</a></li>    					
     				</ul>  				
     			</div>
 			</nav>
@@ -231,6 +232,65 @@ include("Complementos/conexion.php");
               
               <?php
             }
+            if ($_GET["op"]== "u") {
+              $sql_cons="SELECT *FROM usuarios where id_usuario=$ide";
+              $ejecuta_sql_mod=mysql_query($sql_cons);//Ejecuto la consulta y la almaceno en una variable
+              $comprueba_cons=mysql_numrows($ejecuta_sql_mod);
+              if ($comprueba_cons==0) {
+              # code...
+              }else{
+                $datos=mysql_fetch_array($ejecuta_sql_mod);
+                $sql_conss="SELECT *FROM empleado where id_empleado=$datos[4]";
+                $ejecuta_sql_mods=mysql_query($sql_conss);//Ejecuto la consulta y la almaceno en una variable
+                $comprueba_conss=mysql_numrows($ejecuta_sql_mods);
+                $datoss=mysql_fetch_array($ejecuta_sql_mods);
+                ?>
+                <h4>MODIFICIACION - USUARIO</h4>
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">Empleado:</label>
+                  <div class="col-sm-4">
+                    <input id="nameEmple" type="text" class="form-control" placeholder="Nombre" value="<?php echo $datoss[1];?>" disabled="true">
+                  </div>
+                  <br><br>
+                  <label  class="col-sm-2 control-label">Usuario:</label>
+                  <div class="col-sm-4">
+                    <input id="nameUsu" type="text" class="form-control" placeholder="Nombre" value="<?php echo $datos[1];?>" >
+                  </div>
+                  <br><br>
+                  <label  class="col-sm-2 control-label">Contraseña:</label>
+                  <div class="col-sm-7">
+                    <input id="passUsu"  type="password" class="form-control"  placeholder="Contraseña" >
+                  </div>
+                  <br><br>
+                  
+                <?php
+                $id_cat=$datos[3];
+
+              }
+             
+                ?>
+                <label  class="col-sm-2 control-label">Sucursal:</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name="opcioU" id="opcioU"> 
+                      
+                      <option value="NO TIENE PERMISOS">Seleccione</option>
+                      <option value="Administrador">Administrador</option>
+                      <option value="Usuario Normal">Usuario Normal</option>
+                    </select>
+                  </div>
+                
+              
+                            
+                  <br><br>
+                  <div class="col-sm-7">
+                    <br><br>
+                    <button onclick="modificarUsuario();" type="button" class="btn btn-success">Guardar</button>
+                  </div>
+                </div>
+              </form>
+              <?php
+            }
           }
           echo '<script languaje="JavaScript">
           var vari="'.$ide.'";
@@ -316,6 +376,7 @@ include("Complementos/conexion.php");
         nameS:nombreS,
         addressS: direccionS,
         telephoneS: telefonoS,
+         id:vari,
         op:'updateSucursal'
       }
 
@@ -341,7 +402,36 @@ include("Complementos/conexion.php");
         nameP:nombreP,
         addressP: direccionP,
         telephoneP: telefonoP,
+         id:vari,
         op:'updateProveedor'
+      }
+
+    });
+
+  }
+  function modificarUsuario(){
+    var nombreEm=$('#nameEmple').val();
+    var nameUs=$('#nameUsu').val();
+    var pasUser=$('#passUsu').val();
+    var tipoUs=$('#opcioU').val();
+    $.ajax({
+      url:'Controles/procesos.php',
+      type:'POST',
+      success:function(respuesta){
+        if(respuesta=="exito"){
+          window.location.href = "verAdmin.php#usuario";
+        }
+        if(respuesta=="error"){
+          error();
+        }
+      },
+      data:{
+        nameEmpleado:nombreEm,
+        users: nameUs,
+        passUsers: pasUser,
+        typeU:tipoUs,
+        id:vari,
+        op:'updateUsuario'
       }
 
     });

@@ -32,6 +32,7 @@ class process{
 	function login($user,$clave){
 		$seguridad="$/adhi?$";
 		$pass=sha1(md5($seguridad.$clave));
+		//echo $pass;
 		$consulta="SELECT *FROM usuarios WHERE usuario='$user' and clave='$pass'";
 		$sql = mysql_query($consulta);
 		$n_sql = mysql_num_rows($sql);
@@ -39,9 +40,15 @@ class process{
 		    $id_user=$user_log[0];
 		    $tipo=$user_log[3];
 		    $nombre=$user_log[1];
+		    $idemple=$user_log[4];
+		    $sql_usuario="SELECT *FROM empleado where id_empleado=$idemple " ; //String de la consulta
+            $consul=mysql_query($sql_usuario);
+		    while ($daemple= mysql_fetch_array($consul)) {
+		    	$iddE=$daemple[3];
+		    }
 	    }
 	    if(isset($id_user)){
-
+	    $_SESSION['sucursalE']=$iddE;
 	    $_SESSION['usuario_logiado']=$id_user;
 	    $_SESSION['tipo_usuario']=$tipo;
 	    $_SESSION['nombre_usuario']=$nombre;
@@ -156,8 +163,8 @@ class process{
 		}
 		
 	}
-	function updateSucursal($nomS, $direccS, $telefS){
-		$sql = mysql_query("INSERT INTO sucursal (nombre,direccion,telefono) VALUES ('$nomS','$direccS','$telefS')");
+	function updateSucursal($nomS, $direccS, $telefS, $idS){
+		$sql = mysql_query("UPDATE sucursal SET nombre='$nomS',direccion='$direccS',telefono='$telefS' WHERE id_sucursal='$idS'");
 		if($sql){
 			return true;
 		}else{
@@ -184,8 +191,8 @@ class process{
 		die();
 
 	}
-	function updateProveedor($nomP, $direccP, $telefP){
-		$sql = mysql_query("INSERT INTO proveedor (nombre,direccion,telefono) VALUES ('$nomP','$direccP','$telefP')");
+	function updateProveedor($nomP, $direccP, $telefP, $idP){
+		$sql = mysql_query("UPDATE proveedor SET nombre='$nomP', direccion='$direccP',telefono='$telefP' WHERE id_proveedor='$idP'");
 		if($sql){
 			return true;
 		}else{
@@ -261,6 +268,53 @@ class process{
 
 	}
 	//Fin codigo de factura
+	function guardarUsuario($username, $claveU,  $tipoU, $empleadoU){
+		if (isset($username) && isset($claveU) && isset($empleadoU) && isset($tipoU)) {
+			$sql = mysql_query("INSERT INTO usuarios (usuario,clave,tipo,id_empleado) VALUES ('$username','$claveU' ,'$tipoU','$empleadoU')");
+			echo mysql_error();
+			if($sql){
+				return true;
+			}else{
+
+				return false;
+			}
+			//close conexion 
+			mysqli_close($link);
+			die();	
+		}else{
+			echo "NO HAY DATOS";
+		}
+		
+	}
+
+	function guardarTraslado( $productos, $sucursales, $cantidades, $fech, $sucId){
+		$sql = mysql_query("INSERT INTO traslados (id_producto,id_sucursal, cantidad, fechaEnviada ,fechaRecibida, estado, idSucursal) VALUES ('$productos', '$sucursales', '$cantidades', '	$fech', '', '','$sucId')");
+		if($sql){
+			return true;
+		}else{
+
+			return false;
+		}
+
+		//close conexion 
+		mysqli_close($link);
+		die();
+
+	}
+	function updateUsuario($nomeU, $userU, $passUsername, $tiU, $idU){
+		$sql = mysql_query("UPDATE usuarios SET usuario='$userU', clave='$passUsername', tipo='$tiU' WHERE id_usuario='$idU'");
+		if($sql){
+			return true;
+		}else{
+
+			return false;
+		}
+
+		//close conexion 
+		mysqli_close($link);
+		die();
+
+	}
 
 
 }
@@ -353,12 +407,25 @@ switch ($op) {
 			echo "error";
 		}
 		break;
-	case 'updateEmpleado':
-		$nomE=$_POST['nameE'];
-		$apelliE=$_POST['lastnameE'];
-		$idE=$_POST['localE'];
-		$idd=$_POST['id'];
-		if($llamar -> updateEmpleado($nomE, $apelliE, $idE, $idd)){
+	case 'updateSucursal':
+		$nomS=$_POST['nameS'];
+		$direccS=$_POST['addressS'];
+		$telefS=$_POST['telephoneS'];
+		$idS=$_POST['id'];
+		if($llamar -> updateSucursal($nomS, $direccS, $telefS, $idS)){
+			$llamar->historial("Se actualizon datos de Empleado");
+			echo "exito";
+		}else{
+			echo mysql_error();
+			echo "error";
+		}
+		break;
+	case 'updateProveedor':
+		$nomP=$_POST['nameP'];
+		$direccP=$_POST['addressP'];
+		$telefP=$_POST['telephoneP'];
+		$idP=$_POST['id'];
+		if($llamar -> updateProveedor($nomP, $direccP, $telefP, $idP)){
 			$llamar->historial("Se actualizon datos de Empleado");
 			echo "exito";
 		}else{
@@ -430,6 +497,47 @@ switch ($op) {
 	    //$datos=array("nombre" => $nombre,"fecha" => $fecha, "total" => $total);
 	    echo json_encode($da_productos);
 
+		break;
+	case 'guardarUsuario':
+		$seguridad="$/adhi?$";
+		$username=$_POST['usuU'];
+		$clave=sha1(md5($seguridad.$_POST['passU']));
+		$empleadoU=$_POST['empleadoU'];
+		$tipoU=$_POST['tipo'];
+		if($llamar -> guardarUsuario($username,$clave, $tipoU, $empleadoU )){
+			echo "exito";
+		}else{
+			echo "error";
+		}
+		break;
+	case 'guardarTraslado':
+		$sucursales=$_POST['sucurP'];
+		$productos=$_POST['producP'];
+		$cantidades=$_POST['cantiP'];
+		$fech=$_POST['fechas'];
+		$sucId=$_POST['sucuE'];
+		if($llamar -> guardarTraslado($productos, $sucursales, $cantidades, $fech, $sucId )){
+			echo "exito";
+			
+		}else{
+			echo "error";
+			//echo mysql_error();
+		}
+		break;
+	case 'updateUsuario':
+		$seguridad="$/adhi?$";
+		$nomeU=$_POST['nameEmpleado'];
+		$userU=$_POST['users'];
+		$passUsername=sha1(md5($seguridad.$_POST['passUsers']));
+		$tiU=$_POST['typeU'];
+		$idU=$_POST['id'];
+		if($llamar -> updateUsuario($nomeU, $userU, $passUsername, $tiU, $idU)){
+			$llamar->historial("Se actualizon datos de Empleado");
+			echo "exito";
+		}else{
+			echo mysql_error();
+			echo "error";
+		}
 		break;
 
 	

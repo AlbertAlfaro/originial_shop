@@ -2,7 +2,7 @@
 
  $host_db = "localhost";
  $user_db = "root";
- $pass_db = "1234";
+ $pass_db = "3ktr95";
  $db_name = "db_originalShop";
 
 // Conexion a la base de datos y seleccionamos la base a utilizar

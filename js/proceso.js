@@ -37,6 +37,24 @@ $(document).ready(function() {
             }
        });
    });
+   $('#solicitud').click(function(){
+      $.ajax({
+            type: "POST",
+            url: "solicitarProducto.php",
+            success: function(a) {
+                $('#cuadro').html(a);
+            }
+       });
+   });
+   $('#usuarios').click(function(){
+      $.ajax({
+            type: "POST",
+            url: "registroUsuarios.php",
+            success: function(a) {
+                $('#cuadro').html(a);
+            }
+       });
+   });
 
 
 
